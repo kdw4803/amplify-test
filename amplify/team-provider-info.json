@@ -1,0 +1,14 @@
+{
+    "master": {
+        "awscloudformation": {
+            "AuthRoleName": "vue-demo-master-20190521150817-authRole",
+            "UnauthRoleArn": "arn:aws:iam::304574029591:role/vue-demo-master-20190521150817-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::304574029591:role/vue-demo-master-20190521150817-authRole",
+            "Region": "ap-northeast-1",
+            "DeploymentBucketName": "vue-demo-master-20190521150817-deployment",
+            "UnauthRoleName": "vue-demo-master-20190521150817-unauthRole",
+            "StackName": "vue-demo-master-20190521150817",
+            "StackId": "arn:aws:cloudformation:ap-northeast-1:304574029591:stack/vue-demo-master-20190521150817/d3edcba0-7b8e-11e9-8d77-0aa20f14f06e"
+        }
+    }
+}
