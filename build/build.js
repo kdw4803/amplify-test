@@ -1,8 +1,7 @@
 'use strict'
 require('./check-versions')()
 
-process.env.NODE_ENV = 'production'
-process.env.USER_BRANCH = process.argv[2] || 'master'
+process.env.NODE_ENV = process.argv[2] || 'production'
 
 const ora = require('ora')
 const rm = require('rimraf')
