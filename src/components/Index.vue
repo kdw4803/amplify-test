@@ -18,7 +18,7 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      msg: 'Welcome to Kmong Demo App in ' + process.env.NODE_ENV
+      msg: 'Welcome to Kmong Demo App in ' + process.env.USER_BRANCH
     }
   }
 }
