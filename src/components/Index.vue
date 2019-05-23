@@ -9,13 +9,6 @@
           UserList
         </a>
       </li>
-      <li>
-        <a
-          href="/#/orders"
-        >
-          OrderList
-        </a>
-      </li>
     </ul>
   </div>
 </template>

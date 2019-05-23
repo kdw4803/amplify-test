@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Index from '@/components/Index'
 import UserList from '@/components/UserList'
 import OrderList from '@/components/OrderList'
+import MileageList from '@/components/MileageList'
 
 Vue.use(Router)
 
@@ -19,9 +20,14 @@ export default new Router({
       component: UserList
     },
     {
-      path: '/orders',
+      path: '/orders/:user_id',
       name: 'OrderList',
       component: OrderList
+    },
+    {
+      path: '/mileages/:user_id',
+      name: 'MileageList',
+      component: MileageList
     }
   ]
 })

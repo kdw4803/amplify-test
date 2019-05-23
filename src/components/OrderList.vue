@@ -5,6 +5,17 @@
 <th>UserID</th>
 <th>BillingID</th>
 <th>Amount</th>
+<th>StartDate</th>
+<th>EndDate</th>
+<th>DeliverDate</th>
+<th>ExpectedDate</th>
+<th>OrderKinds</th>
+<th>OrderStatus</th>
+<th>PID</th>
+<th>PKGID</th>
+<th>PLID</th>
+<th>UserIDBuyer</th>
+<th>UserIDSeller</th>
 </tr>
 </thead>
 <tbody>
@@ -16,6 +27,17 @@
 <td>{{ row.UserID }}</td>
 <td>{{ row.BillingID }}</td>
 <td>{{ row.Amount }}</td>
+<td>{{ row.StartDate }}</td>
+<td>{{ row.EndDate }}</td>
+<td>{{ row.DeliverDate }}</td>
+<td>{{ row.ExpectedDate }}</td>
+<td>{{ row.OrderKinds }}</td>
+<td>{{ row.OrderStatus }}</td>
+<td>{{ row.PID }}</td>
+<td>{{ row.PKGID }}</td>
+<td>{{ row.PLID }}</td>
+<td>{{ row.UserIDBuyer }}</td>
+<td>{{ row.UserIDSeller }}</td>
 </tr>
 </template>
 </tbody>
@@ -42,6 +64,9 @@ export default {
 		async listBillings() {
 			const result = await API.graphql(graphqlOperation(queries.listBillings, {
 				filter: {
+					UserID: {
+						eq: this.$route.params.user_id
+					},
 					BillingID: {
 						beginsWith: 'ORDER'
 					}

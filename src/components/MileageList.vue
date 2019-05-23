@@ -3,7 +3,9 @@
 <thead>
 <tr>
 <th>UserID</th>
-<th>Dated</th>
+<th>BillingID</th>
+<th>Amount</th>
+<th>MileageCode</th>
 </tr>
 </thead>
 <tbody>
@@ -13,15 +15,9 @@
 <template v-else>
 <tr v-for="row in rows">
 <td>{{ row.UserID }}</td>
-<td>{{ row.Dated }}</td>
-<td>
-<a v-bind:href="'/#/orders/' + row.UserID">
-orders
-</a>
-<a v-bind:href="'/#/mileages/' + row.UserID">
-mileages
-</a>
-</td>
+<td>{{ row.BillingID }}</td>
+<td>{{ row.Amount }}</td>
+<td>{{ row.MileageCode }}</td>
 </tr>
 </template>
 </tbody>
@@ -34,7 +30,7 @@ import { API, graphqlOperation } from 'aws-amplify'
 import * as queries from '../graphql/queries'
 
 export default {
-  name: 'UserList',
+  name: 'OrderList',
 	data() {
 		return {
 			loading: false,
@@ -48,8 +44,11 @@ export default {
 		async listBillings() {
 			const result = await API.graphql(graphqlOperation(queries.listBillings, {
 				filter: {
+					UserID: {
+						eq: this.$route.params.user_id
+					},
 					BillingID: {
-						beginsWith: 'USER'
+						beginsWith: 'MILEAGE'
 					}
 				}
 			}))
