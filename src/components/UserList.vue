@@ -12,14 +12,35 @@
 </template>
 <template v-else>
 <tr v-for="row in rows">
-<td>{{ row.UserID }}</td>
+<td>
+<a v-bind:href="'/#/users/' + row.UserID">
+{{ row.UserID }}
+</a>
+</td>
 <td>{{ row.Dated }}</td>
 <td>
-<a v-bind:href="'/#/orders/' + row.UserID">
+<a v-bind:href="'/#/orders?user_id=' + row.UserID">
 orders
 </a>
-<a v-bind:href="'/#/mileages/' + row.UserID">
+</td>
+<td>
+<a v-bind:href="'/#/mileages?user_id=' + row.UserID">
 mileages
+</a>
+</td>
+<td>
+<a v-bind:href="'/#/pgs?user_id=' + row.UserID">
+pgs
+</a>
+</td>
+<td>
+<a v-bind:href="'/#/refunds?user_id=' + row.UserID">
+refunds
+</a>
+</td>
+<td>
+<a v-bind:href="'/#/profits?user_id=' + row.UserID">
+profits
 </a>
 </td>
 </tr>

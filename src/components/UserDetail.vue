@@ -3,9 +3,7 @@
 <thead>
 <tr>
 <th>UserID</th>
-<th>BillingID</th>
-<th>Amount</th>
-<th>MileageCode</th>
+<th>Dated</th>
 </tr>
 </thead>
 <tbody>
@@ -13,12 +11,8 @@
 <spinner></spinner> <!-- here use a loaded you prefer -->
 </template>
 <template v-else>
-<tr v-for="row in rows">
-<td>{{ row.UserID }}</td>
-<td>{{ row.BillingID }}</td>
-<td>{{ row.Amount }}</td>
-<td>{{ row.MileageCode }}</td>
-</tr>
+<td>{{ result.UserID }}</td>
+<td>{{ result.Dated }}</td>
 </template>
 </tbody>
 </table>
@@ -30,30 +24,24 @@ import { API, graphqlOperation } from 'aws-amplify'
 import * as queries from '../graphql/queries'
 
 export default {
-  name: 'OrderList',
+  name: 'UserDetail',
 	data() {
 		return {
 			loading: false,
-			rows: []
+			result: {}
 		}
 	},
 	created() {
-			this.listBillings()
+			this.getBilling()
 	},
 	methods: {
-		async listBillings() {
-			const result = await API.graphql(graphqlOperation(queries.listBillings, {
-				filter: {
-					UserID: {
-						eq: this.$route.query.user_id
-					},
-					BillingID: {
-						beginsWith: 'MILEAGE'
-					}
-				}
+		async getBilling() {
+			const result = await API.graphql(graphqlOperation(queries.getBilling, {
+				UserID: this.$route.params.user_id,
+				BillingID: 'USER-' + this.$route.params.user_id
 			}))
 			
-			this.rows = result.data.listBillings.items
+			this.result = result.data.getBilling
     }
 	}
 }
