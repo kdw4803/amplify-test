@@ -6,6 +6,7 @@
 <th>BillingID</th>
 <th>Amount</th>
 <th>Status</th>
+<th></th>
 </tr>
 </thead>
 <tbody>
@@ -18,6 +19,24 @@
 <td>{{ row.BillingID }}</td>
 <td>{{ row.Amount }}</td>
 <td>{{ row.Status }}</td>
+<td></td>
+</tr>
+<tr>
+<td>
+{{user_id}}
+</td>
+<td>
+<input type='text' v-model='billing_id'/>
+</td>
+<td>
+<input type='text' v-model='amount'/>
+</td>
+<td>
+<input type='text' v-model='status'/>
+</td>
+<td>
+<button v-on:click='createBilling'>Add</button>
+</td>
 </tr>
 </template>
 </tbody>
@@ -28,13 +47,18 @@
 /* eslint-disable */
 import { API, graphqlOperation } from 'aws-amplify'
 import * as queries from '../graphql/queries'
+import * as mutations from '../graphql/mutations'
 
 export default {
   name: 'RefundList',
 	data() {
 		return {
 			loading: false,
-			rows: []
+			rows: [],
+			billing_id: '',
+			amount: '',
+			status: '',
+			user_id: this.$route.query.user_id
 		}
 	},
 	created() {
@@ -54,7 +78,25 @@ export default {
 			}))
 			
 			this.rows = result.data.listBillings.items
-    }
+    },
+		async createBilling(event) {
+			const today = new Date();
+
+			const result = await API.graphql(graphqlOperation(mutations.createBilling, {
+				input: {
+					BillingID: this.billing_id,
+					UserID: this.$route.query.user_id,
+					Dated: today.toISOString().substring(0, 10),
+					Amount: this.amount,
+					Status: this.status
+				}
+			}))
+			
+			this.rows.push(result.data.createBilling)
+			this.billing_id = ''
+			this.status = ''
+			this.amount = ''
+		}
 	}
 }
 </script>
