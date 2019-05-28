@@ -67,7 +67,8 @@ export default {
 	},
 	methods: {
 		async listBillings() {
-			const result = await API.graphql(graphqlOperation(queries.listBillings, {
+			let columns = ['UserID', 'Dated']
+			const result = await API.graphql(graphqlOperation(queries.listBillings.with(columns), {
 				filter: {
 					BillingID: {
 						beginsWith: 'USER'

@@ -62,7 +62,8 @@ export default {
 	},
 	methods: {
 		async listBillings() {
-			const result = await API.graphql(graphqlOperation(queries.listBillings, {
+			let columns = ['UserID', 'BillingID', 'Amount', 'StartDate', 'EndDate', 'DeliverDate', 'ExpectedDate', 'OrderKinds', 'OrderStatus', 'PID', 'PKGID', 'PLID', 'UserIDBuyer', 'UserIDSeller']
+			const result = await API.graphql(graphqlOperation(queries.listBillings.with(columns), {
 				filter: {
 					UserID: {
 						eq: this.$route.query.user_id

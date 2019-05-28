@@ -36,7 +36,8 @@ export default {
 	},
 	methods: {
 		async getBilling() {
-			const result = await API.graphql(graphqlOperation(queries.getBilling, {
+			let columns = ['UserID', 'Dated']
+			const result = await API.graphql(graphqlOperation(queries.getBilling.with(columns), {
 				UserID: this.$route.params.user_id,
 				BillingID: 'USER-' + this.$route.params.user_id
 			}))
